@@ -36,6 +36,15 @@
     .show-text { filter: blur(0px); opacity: 1; transform: scale(1); }
     @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #fff } }
     
+    .fade-out-text {
+        animation: fadeBlurOut 1s forwards;
+    }
+
+    @keyframes fadeBlurOut {
+        0% { filter: blur(0px); opacity: 1; transform: scale(1); }
+        100% { filter: blur(20px); opacity: 0; transform: scale(1.1); }
+    }
+    
     .click-text { color: #888; font-size: 16px; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0; margin-top: 20px; transition: opacity 1s ease-in-out, color 0.3s; pointer-events: none; }
     .click-text.show { opacity: 1; pointer-events: auto; }
     .click-text:hover { color: #fff; }
@@ -64,7 +73,7 @@
 
     .profile-header { display: flex; gap: 20px; align-items: center; margin-bottom: 15px; }
     
-    /* AVATAR (KHÔNG VIỀN, KHÔNG HÀO QUANG) */
+    /* AVATAR */
     .avatar-container { 
         position: relative; 
         width: 110px; 
@@ -104,7 +113,7 @@
     .badge-img { height: 24px; vertical-align: middle; object-fit: contain; }
     .discord-tag { font-size: 16px; color: #ddd; display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: bold; }
     
-    /* HIỆU ỨNG CHỮ BIO LẤP LÁNH (SHINY) */
+    /* HIỆU ỨNG CHỮ BIO LẤP LÁNH */
     .bio { 
         font-size: 15px; margin-bottom: 15px; font-weight: bold; 
         background: linear-gradient(90deg, #fff, #a855f7, #fff);
@@ -115,19 +124,18 @@
     }
     @keyframes shineText { to { background-position: 200% center; } }
     
-    /* BADGE NHẤP NHÔ LƠ LỬNG */
+    /* BADGE LƠ LỬNG */
     .badge-img { animation: floatBadge 2s ease-in-out infinite; }
     .badge-img:nth-child(2) { animation-delay: 0.2s; }
     .badge-img:nth-child(3) { animation-delay: 0.4s; }
     .badge-img:nth-child(4) { animation-delay: 0.6s; }
-    .badge-img:nth-child(5) { animation-delay: 0.8s; }
     
     @keyframes floatBadge {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-3px); }
     }
     
-    /* ICON MẠNG XÃ HỘI NẢY LÊN + GỢN SÓNG */
+    /* ICON MẠNG XÃ HỘI */
     .socials { display: flex; gap: 15px; font-size: 24px; align-items: center; }
     .socials a, .socials i { color: #fff; cursor: pointer; transition: 0.3s; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; }
     .socials a:hover, .socials i:hover { 
@@ -200,23 +208,20 @@
             
             <div class="profile-header">
                 <div class="avatar-container">
-                    <!-- AVATAR MÈO -->
                     <img src="https://i.postimg.cc/bvptdzv0/IMG-0054.gif" alt="Avatar" class="avatar" id="discord-avatar">
                     <div class="status-icon" id="discord-status"><i class="fas fa-minus"></i></div>
                 </div>
                 <div class="info">
-                    <div class="name" id="discord-name">
-                        Đang tải...
-                    </div>
+                    <!-- TÊN CÓ HIỆU ỨNG GÕ VÀ BLUR -->
+                    <div class="name" id="discord-name" style="filter: blur(5px); opacity: 0.5; transition: all 1s ease;"></div>
                     
-                    <!-- HÀNG BADGE (CHỈ CÒN BADGE PNG + CSS) -->
+                    <!-- HÀNG BADGE -->
                     <div class="name" style="margin-bottom: 8px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979153280180384/legend.png?ex=6af1c934&is=6af077b4&hm=afebed858dec4146a9d8db5f0182f2b6b7a8a8e297363ceecac831d258472f38&" class="badge-img" alt="Badge 1">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979347786698762/platinum.png?ex=6af1c962&is=6af077e2&hm=c598d7081cc4b61ae6e33d71637402e65c2dc49abe837741af0e2bc1ddad8889&" class="badge-img" alt="Badge 2">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979435401519304/partnered.png?ex=6af1c977&is=6af077f7&hm=453c33a5e2d78feb5c87bd65fd4e116309ec0c11489af8be90dea1df47b236bd&" class="badge-img" alt="Badge 3">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979461175509113/verified.png?ex=6af1c97d&is=6af077fd&hm=e303613d6e00c4efe92e95a3166ae57226fca6383b8835f776e3fdf702cbff3d&" class="badge-img" alt="Badge 4">
                         
-                        <!-- Badge BOT vẽ bằng CSS -->
                         <span style="background-color: #5865F2; color: white; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; height: 22px; font-family: 'Poppins', sans-serif;">
                             <i class="fas fa-check" style="font-size: 10px;"></i> BOT
                         </span>
@@ -285,7 +290,11 @@
             } else {
                 typewriterElement.style.borderRight = "none";
                 typewriterElement.classList.add('show-text');
-                setTimeout(() => { clickTextElement.classList.add('show'); }, 2000);
+                
+                setTimeout(() => {
+                    typewriterElement.classList.add('fade-out-text');
+                    clickTextElement.classList.add('show');
+                }, 1000);
             }
         }
         setTimeout(typeWriter, 500);
@@ -374,7 +383,7 @@
         }
         animateSnow();
 
-        // 5. API DISCORD (LẤY TÊN, STATUS)
+        // 5. API DISCORD (LẤY TÊN, STATUS VÀ GÕ CHỮ)
         const DISCORD_ID = '1310594946784559271'; 
         async function fetchDiscordData() {
             try {
@@ -383,9 +392,27 @@
                 if (result.success) {
                     const data = result.data;
                     
-                    document.getElementById('discord-name').childNodes[0].nodeValue = data.discord_user.global_name || data.discord_user.username;
-                    document.getElementById('discord-username').innerText = data.discord_user.username;
+                    // GÕ CHỮ TÊN
+                    const displayName = data.discord_user.global_name || data.discord_user.username;
+                    const nameElement = document.getElementById('discord-name');
+                    nameElement.innerHTML = ""; // Xóa chữ "Đang tải..."
                     
+                    let nameIndex = 0;
+                    function typeName() {
+                        if (nameIndex < displayName.length) {
+                            nameElement.innerHTML += displayName.charAt(nameIndex);
+                            nameIndex++;
+                            setTimeout(typeName, 100);
+                        } else {
+                            // Gõ xong thì bớt mờ (sáng lên)
+                            nameElement.style.filter = "blur(0px)";
+                            nameElement.style.opacity = "1";
+                        }
+                    }
+                    typeName();
+
+                    // CẬP NHẬT STATUS
+                    document.getElementById('discord-username').innerText = data.discord_user.username;
                     const statusIcon = document.getElementById('discord-status');
                     const status = data.discord_status;
                     if (status === 'online') { statusIcon.style.backgroundColor = '#23a55a'; statusIcon.innerHTML = ''; }
