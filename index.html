@@ -30,7 +30,7 @@
         color: #fff; font-family: 'Alex Brush', cursive; font-size: clamp(80px, 20vw, 150px); font-weight: 400; 
         text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #8a2be2, 0 0 80px #8a2be2; 
         border-right: 3px solid #fff; animation: blink-caret 0.75s step-end infinite; 
-        filter: blur(8px); opacity: 0.3; transform: scale(0.98); 
+        filter: blur(12px); opacity: 0.3; transform: scale(0.95); 
         transition: filter 2s ease-out, opacity 2s ease-out, transform 2s ease-out; 
     }
     .show-text { filter: blur(0px); opacity: 1; transform: scale(1); }
@@ -64,7 +64,7 @@
 
     .profile-header { display: flex; gap: 20px; align-items: center; margin-bottom: 15px; }
     
-    /* PHẦN AVATAR VÀ KHUNG */
+    /* AVATAR (ĐÃ BỎ VIỀN TÍM VÀ BÓNG ĐEN) */
     .avatar-container { 
         position: relative; 
         width: 110px; 
@@ -77,10 +77,9 @@
         height: 100%; 
         border-radius: 50%; 
         object-fit: cover; 
-        /* Khung viền phát sáng */
-        border: 4px solid #a855f7; 
-        box-shadow: 0 0 20px #a855f7; 
-        background-color: #1e1b4b; 
+        border: none; 
+        box-shadow: none; 
+        background: transparent; 
         display: block;
     }
     
@@ -182,14 +181,19 @@
             
             <div class="profile-header">
                 <div class="avatar-container">
-                    <!-- ĐÃ DÙNG LINK ẢNH CỦA MÀY -->
+                    <!-- AVATAR MÈO (KHÔNG VIỀN) -->
                     <img src="https://i.postimg.cc/bvptdzv0/IMG-0054.gif" alt="Avatar" class="avatar" id="discord-avatar">
                     <div class="status-icon" id="discord-status"><i class="fas fa-minus"></i></div>
                 </div>
                 <div class="info">
                     <div class="name" id="discord-name">
                         Đang tải...
-                        <img src="https://media.discordapp.net/attachments/1558827497850798130/1566822097420820630/ironclad.png?ex=6ae9f04a&is=6ae89eca&hm=e0d36baa46ed395e3cb21c38027bfe5567a6c5e71e716352d44c829e0164d0cd&=&format=webp&quality=lossless" class="badge-img" alt="Sword Badge" style="margin-left: 5px;">
+                        <!-- 5 BADGE CỦA MÀY -->
+                        <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979153280180384/legend.png?ex=6af1c934&is=6af077b4&hm=afebed858dec4146a9d8db5f0182f2b6b7a8a8e297363ceecac831d258472f38&" class="badge-img" alt="Badge 1">
+                        <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979347786698762/platinum.png?ex=6af1c962&is=6af077e2&hm=c598d7081cc4b61ae6e33d71637402e65c2dc49abe837741af0e2bc1ddad8889&" class="badge-img" alt="Badge 2">
+                        <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979435401519304/partnered.png?ex=6af1c977&is=6af077f7&hm=453c33a5e2d78feb5c87bd65fd4e116309ec0c11489af8be90dea1df47b236bd&" class="badge-img" alt="Badge 3">
+                        <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979461175509113/verified.png?ex=6af1c97d&is=6af077fd&hm=e303613d6e00c4efe92e95a3166ae57226fca6383b8835f776e3fdf702cbff3d&" class="badge-img" alt="Badge 4">
+                        <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979534529695907/verified-bot.png?ex=6af1c98f&is=6af0780f&hm=af9464b5e30a634a18d1a2ef3cbf7e18db04b87f8d56175e5ded0b1a1ee00d27&" class="badge-img" alt="Badge 5">
                     </div>
                     
                     <div class="discord-tag"><i class="fab fa-discord"></i> <span id="discord-username">...</span></div>
@@ -251,11 +255,11 @@
             if (charIndex < textToType.length) {
                 typewriterElement.innerHTML += textToType.charAt(charIndex);
                 charIndex++;
-                setTimeout(typeWriter, 120); 
+                setTimeout(typeWriter, 100); 
             } else {
                 typewriterElement.style.borderRight = "none";
                 typewriterElement.classList.add('show-text');
-                setTimeout(() => { clickTextElement.classList.add('show'); }, 1500);
+                setTimeout(() => { clickTextElement.classList.add('show'); }, 2000);
             }
         }
         setTimeout(typeWriter, 500);
@@ -344,7 +348,7 @@
         }
         animateSnow();
 
-        // 5. API DISCORD
+        // 5. API DISCORD (LẤY TÊN, STATUS)
         const DISCORD_ID = '1310594946784559271'; 
         async function fetchDiscordData() {
             try {
