@@ -104,7 +104,7 @@
     .badge-img { height: 24px; vertical-align: middle; object-fit: contain; }
     .discord-tag { font-size: 16px; color: #ddd; display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: bold; }
     
-    /* 1. HIỆU ỨNG CHỮ BIO LẤP LÁNH (SHINY) */
+    /* HIỆU ỨNG CHỮ BIO LẤP LÁNH (SHINY) */
     .bio { 
         font-size: 15px; margin-bottom: 15px; font-weight: bold; 
         background: linear-gradient(90deg, #fff, #a855f7, #fff);
@@ -115,7 +115,7 @@
     }
     @keyframes shineText { to { background-position: 200% center; } }
     
-    /* 2. BADGE NHẤP NHÔ LƠ LỬNG */
+    /* BADGE NHẤP NHÔ LƠ LỬNG */
     .badge-img { animation: floatBadge 2s ease-in-out infinite; }
     .badge-img:nth-child(2) { animation-delay: 0.2s; }
     .badge-img:nth-child(3) { animation-delay: 0.4s; }
@@ -127,7 +127,7 @@
         50% { transform: translateY(-3px); }
     }
     
-    /* 3. ICON MẠNG XÃ HỘI NẢY LÊN + GỢN SÓNG */
+    /* ICON MẠNG XÃ HỘI NẢY LÊN + GỢN SÓNG */
     .socials { display: flex; gap: 15px; font-size: 24px; align-items: center; }
     .socials a, .socials i { color: #fff; cursor: pointer; transition: 0.3s; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; }
     .socials a:hover, .socials i:hover { 
@@ -200,7 +200,7 @@
             
             <div class="profile-header">
                 <div class="avatar-container">
-                    <!-- AVATAR MÈO (GIỮ NGUYÊN, KHÔNG HÀO QUANG) -->
+                    <!-- AVATAR MÈO -->
                     <img src="https://i.postimg.cc/bvptdzv0/IMG-0054.gif" alt="Avatar" class="avatar" id="discord-avatar">
                     <div class="status-icon" id="discord-status"><i class="fas fa-minus"></i></div>
                 </div>
@@ -209,10 +209,8 @@
                         Đang tải...
                     </div>
                     
-                    <!-- HÀNG BADGE LƠ LỬNG -->
+                    <!-- HÀNG BADGE (CHỈ CÒN BADGE PNG + CSS) -->
                     <div class="name" style="margin-bottom: 8px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">
-                        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f381.svg" class="badge-img" alt="Gift">
-                        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f441.svg" class="badge-img" alt="Eye">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979153280180384/legend.png?ex=6af1c934&is=6af077b4&hm=afebed858dec4146a9d8db5f0182f2b6b7a8a8e297363ceecac831d258472f38&" class="badge-img" alt="Badge 1">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979347786698762/platinum.png?ex=6af1c962&is=6af077e2&hm=c598d7081cc4b61ae6e33d71637402e65c2dc49abe837741af0e2bc1ddad8889&" class="badge-img" alt="Badge 2">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979435401519304/partnered.png?ex=6af1c977&is=6af077f7&hm=453c33a5e2d78feb5c87bd65fd4e116309ec0c11489af8be90dea1df47b236bd&" class="badge-img" alt="Badge 3">
