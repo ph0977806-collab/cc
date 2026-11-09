@@ -64,7 +64,7 @@
 
     .profile-header { display: flex; gap: 20px; align-items: center; margin-bottom: 15px; }
     
-    /* AVATAR (ĐÃ BỎ VIỀN TÍM VÀ BÓNG ĐEN) */
+    /* AVATAR (KHÔNG VIỀN, KHÔNG HÀO QUANG) */
     .avatar-container { 
         position: relative; 
         width: 110px; 
@@ -101,27 +101,46 @@
     
     .info { flex: 1; }
     .name { font-size: 24px; font-weight: 600; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-bottom: 5px; }
-    .badge-img { height: 24px; vertical-align: middle; }
+    .badge-img { height: 24px; vertical-align: middle; object-fit: contain; }
     .discord-tag { font-size: 16px; color: #ddd; display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: bold; }
     
-    /* HIỆU ỨNG CHỮ BIO PHÁT SÁNG */
+    /* 1. HIỆU ỨNG CHỮ BIO LẤP LÁNH (SHINY) */
     .bio { 
-        font-size: 15px; color: #fff; margin-bottom: 15px; font-weight: bold; 
-        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #a855f7, 0 0 40px #a855f7; 
-        animation: pulseBio 2s infinite alternate; 
+        font-size: 15px; margin-bottom: 15px; font-weight: bold; 
+        background: linear-gradient(90deg, #fff, #a855f7, #fff);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shineText 3s linear infinite;
     }
-
-    @keyframes pulseBio {
-        from { opacity: 0.8; text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #a855f7, 0 0 40px #a855f7; }
-        to { opacity: 1; text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #a855f7, 0 0 60px #a855f7; }
+    @keyframes shineText { to { background-position: 200% center; } }
+    
+    /* 2. BADGE NHẤP NHÔ LƠ LỬNG */
+    .badge-img { animation: floatBadge 2s ease-in-out infinite; }
+    .badge-img:nth-child(2) { animation-delay: 0.2s; }
+    .badge-img:nth-child(3) { animation-delay: 0.4s; }
+    .badge-img:nth-child(4) { animation-delay: 0.6s; }
+    .badge-img:nth-child(5) { animation-delay: 0.8s; }
+    
+    @keyframes floatBadge {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
     }
     
-    /* ICON MẠNG XÃ HỘI NẢY LÊN */
+    /* 3. ICON MẠNG XÃ HỘI NẢY LÊN + GỢN SÓNG */
     .socials { display: flex; gap: 15px; font-size: 24px; align-items: center; }
     .socials a, .socials i { color: #fff; cursor: pointer; transition: 0.3s; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; }
     .socials a:hover, .socials i:hover { 
         color: #a855f7; transform: translateY(-8px) scale(1.2); 
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    }
+    .socials a:active, .socials i:active {
+        animation: ripple 0.3s linear;
+    }
+    @keyframes ripple {
+        0% { transform: scale(1); }
+        50% { transform: scale(0.9); }
+        100% { transform: scale(1.1); }
     }
     
     .divider { width: 100%; height: 1px; background: rgba(255,255,255,0.2); margin: 20px 0; }
@@ -181,21 +200,30 @@
             
             <div class="profile-header">
                 <div class="avatar-container">
-                    <!-- AVATAR MÈO (KHÔNG VIỀN) -->
+                    <!-- AVATAR MÈO (GIỮ NGUYÊN, KHÔNG HÀO QUANG) -->
                     <img src="https://i.postimg.cc/bvptdzv0/IMG-0054.gif" alt="Avatar" class="avatar" id="discord-avatar">
                     <div class="status-icon" id="discord-status"><i class="fas fa-minus"></i></div>
                 </div>
                 <div class="info">
                     <div class="name" id="discord-name">
                         Đang tải...
-                        <!-- 5 BADGE CỦA MÀY -->
+                    </div>
+                    
+                    <!-- HÀNG BADGE LƠ LỬNG -->
+                    <div class="name" style="margin-bottom: 8px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">
+                        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f381.svg" class="badge-img" alt="Gift">
+                        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f441.svg" class="badge-img" alt="Eye">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979153280180384/legend.png?ex=6af1c934&is=6af077b4&hm=afebed858dec4146a9d8db5f0182f2b6b7a8a8e297363ceecac831d258472f38&" class="badge-img" alt="Badge 1">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979347786698762/platinum.png?ex=6af1c962&is=6af077e2&hm=c598d7081cc4b61ae6e33d71637402e65c2dc49abe837741af0e2bc1ddad8889&" class="badge-img" alt="Badge 2">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979435401519304/partnered.png?ex=6af1c977&is=6af077f7&hm=453c33a5e2d78feb5c87bd65fd4e116309ec0c11489af8be90dea1df47b236bd&" class="badge-img" alt="Badge 3">
                         <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979461175509113/verified.png?ex=6af1c97d&is=6af077fd&hm=e303613d6e00c4efe92e95a3166ae57226fca6383b8835f776e3fdf702cbff3d&" class="badge-img" alt="Badge 4">
-                        <img src="https://cdn.discordapp.com/attachments/1343182309842747496/1568979534529695907/verified-bot.png?ex=6af1c98f&is=6af0780f&hm=af9464b5e30a634a18d1a2ef3cbf7e18db04b87f8d56175e5ded0b1a1ee00d27&" class="badge-img" alt="Badge 5">
+                        
+                        <!-- Badge BOT vẽ bằng CSS -->
+                        <span style="background-color: #5865F2; color: white; font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; height: 22px; font-family: 'Poppins', sans-serif;">
+                            <i class="fas fa-check" style="font-size: 10px;"></i> BOT
+                        </span>
                     </div>
-                    
+
                     <div class="discord-tag"><i class="fab fa-discord"></i> <span id="discord-username">...</span></div>
                     
                     <div class="bio" id="discord-bio"></div>
